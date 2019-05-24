@@ -15,6 +15,12 @@ func init() {
 		Encoding:    "json",
 		Level:       zap.NewAtomicLevelAt(zapcore.DebugLevel),
 		OutputPaths: []string{"./output/logger.log", "stdout"},
+		EncoderConfig: zapcore.EncoderConfig{
+			CallerKey: "caller",
+			EncodeCaller:   zapcore.ShortCallerEncoder,
+			MessageKey: "msg",
+		},
 	}
 	Log, _ = conf.Build()
+	Log.Info("Logger Initialized..")
 }
